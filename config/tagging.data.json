@@ -1,0 +1,142 @@
+{
+    "regex":"https://pythex.org/",
+    "regex-groups": [
+        {
+            "name": "TP-LINK",
+            "type": "router",
+            "regex-list": [
+                "^TP-LINK Wireless N Router (?P<model>(?:WR\\d{3}N)(?:/WR\\d{3}ND)?)$",
+                "^TP-LINK Wireless Lite N Router (?P<model>(?:WR\\d{3}N)(?:/WR\\d{3}ND)?)$",
+                "^TP-LINK Wireless N Nano Router (?P<model>WR\\d{3}N)$",
+                "^TP-LINK Wireless Lite N Access Point (?P<model>WA\\d{3}N)$",
+                "^TP-LINK Wireless AP (?P<model>W[RA]\\d{3}[NG])$",
+                "^TP-LINK Router (?P<model>R\\d{3})$",
+                "^TP-LINK Wireless (?:G )Router (?P<model>WR\\d{3}G|WR\\d{3}G/\\d{3}G)$",
+                "^TP-LINK Multi-Function Wireless N Router (?P<model>WR\\d{3}ND)$",
+                "^TP-LINK Wireless N Gigabit Router (?P<model>WR\\d{4}N[D]?)$",
+                "^TP-LINK Portable Wireless N 3G/4G Router (?P<model>MR\\d{4})$",
+                "^TP-LINK Wireless N 3G(?:/4G)? Router (?P<model>MR\\d{4})$",
+                "^TP-LINK Wireless Lite N 3G(?:/4G)? Router (?P<model>MR\\d{4})$",
+                "^TP-LINK Wireless Dual Band Router (?P<model>WDR\\d{4})$",
+                "^TP-LINK Wireless Dual Band Gigabit Router (?P<model>WDR\\d{4})$",
+                "^TP-LINK Wireless Range Extender (?P<model>WA\\d{3}RE)$",
+                "^TP-LINK Gigabit Broadband VPN Router (?P<model>R\\d{3}VPN)$",
+                "^TL-(?P<model>WR\\d{3}N)[/]?(?:TL-)?(?:WR\\d{3}ND)?$"
+            ]
+        },
+        {
+            "name": "Asus",
+            "type": "Router",
+            "regex-list": [
+                "^(?P<model>RT-N10(?:PV2|LX|E|U|P|\\+)?)[.]?(?:[BC]1)?$",
+                "^(?P<model>RT-N12(?:VP|E|HP|LX|\\+)?)[_]?(?:[CDB]1)?$",
+                "^(?P<model>RT-N13(?:U)?)[.]?(?:[B]1)$",
+                "^(?P<model>RT-N14(?:U|UHP)?)$",
+                "^(?P<model>RT-N14(?:U)?)$",
+                "^(?P<model>RT-G32)[.]?(?:[C]1)?$",
+                "^(?P<model>RT-N[\\d]{2}U)(?:[B]1)?$",
+                "^(?P<model>RT-AC[\\d]{2}U(?:HP)?)$",
+                "^(?:asus[ ]?)?(?P<model>WL[-]?\\d{3}(?:[gcpume]{1,2})?)?[ ]?(?:v2)?$"
+            ]
+        },
+        {
+            "name": "ZyXEL",
+            "type": "Router",
+            "regex-list": [
+                "^ZyXEL (?P<model>Keenetic (?:Giga|Lite|Viva|Ultra|Start|Extra|Omni|4G)[ ]?(?:II[I]?)?)$"
+            ]
+        },
+        {
+            "name": "NETGEAR",
+            "type": "Router",
+            "regex-list": [
+                "^(?P<model>WGT624)(v\\d)?$",
+                "^(?P<model>WGR614)(v\\d)?$",
+                "^(?:NETGEAR[ ]?(?:Router)[ ]?)?(?P<model>DGN2200)(?:v\\d)?$"
+            ]
+        },
+        {
+            "name": "Mikrotik",
+            "type": "Router",
+            "regex-list": [
+                "^RouterOS router configuration page$"
+            ]
+        },
+        {
+            "name": "Tenda",
+            "type": "Router",
+            "regex-list": [
+                "^Tenda (?P<model>11N) Wireless Router Login Screen$"
+            ]
+        },
+        {
+            "name": "D-LINK",
+            "type": "Router",
+            "regex-list": [
+                "^(?P<model>DIR[-_]3[02]0NRU)(?:(B\\d)? rev.(B\\d)/?(B\\d)?)?$",
+                "^(?P<model>DIR[-]?\\d{3})$"
+            ]
+        },
+        {
+            "name": "D-LINK DVR",
+            "type": "DVR",
+            "regex-list": [
+                "^(?P<model>(?:DCS|DNR|DGS)-\\d{3,4}(?:[LBG1]+)?)(?:_[0-9A-F]{2})?$"
+            ]
+        },
+        {
+            "name": "NETIS",
+            "type": "Router",
+            "regex-list": [
+                "^(?P<model>WF\\d{4}[ER]?)[_]?(RU|EU)?$"
+            ]
+        },
+        {
+            "name": "XIAOMI",
+            "type": "Router",
+            "regex-list": [
+                "^(?P<model>MI-MINI)$"
+            ]
+        },
+        {
+            "name": "Apache",
+            "type": "Server",
+            "regex-list": [
+                "^Apache\\/\\d\\.\\d\\.\\d{1,2} \\(CentOS\\)$"
+            ]
+        }
+    ],
+    "server-groups": [
+        {
+            "name": "Asus",
+            "type": "Router",
+            "regex-list": [
+                "httpd\\/2\\.0"
+            ]
+        },
+        {
+            "name": "DVR",
+            "type": "DVR",
+            "regex-list": [
+                "DVRDVS-Webs",
+                "DNVRS-Webs"
+            ]
+        },
+        {
+            "name": "TP-LINK",
+            "type": "router",
+            "regex-list": [
+                "Router Webserver",
+                "Router",
+                "TP-LINK Router"
+            ]
+        },
+        {
+            "name": "Apache",
+            "type": "server",
+            "regex-list": [
+                "Apache"
+            ]
+        }
+    ]
+}

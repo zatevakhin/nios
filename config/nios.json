@@ -1,0 +1,31 @@
+{
+    "nios": {
+        "scanning-workers-count": 8
+    },
+    "timeout": {
+        "tcp-connect": 0.5,
+        "tcp-connect-read": 2.0
+    },
+    "socks-proxy":
+    {
+        "tor":
+        {
+            "ip": "127.0.0.1",
+            "port": 9050
+        }
+    },
+    "core":{
+        "modules":{
+            "location": "nios/base/modules",
+            "extensions": ["py", "so"]
+        },
+        "plugins":{
+            "location": "nios/base/plugins",
+            "extensions": ["py", "so"]
+        },
+        "exploits":{
+            "location": "nios/base/exploits",
+            "extensions": ["py", "so"]
+        }
+    }
+}
