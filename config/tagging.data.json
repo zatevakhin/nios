@@ -92,10 +92,18 @@
             ]
         },
         {
+            "name": "Linksys",
+            "type": "Router",
+            "regex-list": [
+                "^(?P<model>WRT\\d{3}N)$"
+            ]
+        },
+        {
             "name": "XIAOMI",
             "type": "Router",
             "regex-list": [
-                "^(?P<model>MI-MINI)$"
+                "^(?P<model>MI-MINI)$",
+                "^(?P<model>MI-3)$"
             ]
         },
         {
@@ -119,7 +127,8 @@
             "type": "DVR",
             "regex-list": [
                 "DVRDVS-Webs",
-                "DNVRS-Webs"
+                "DNVRS-Webs",
+                "GoAhead-Webs"
             ]
         },
         {

@@ -5,7 +5,7 @@ from bottle.ext.websocket import websocket
 from bottle import run, Bottle, template, static_file, response
 import json
 from threading import Thread
-
+from enum import Enum
 
 class SetEncoder(json.JSONEncoder):
 
@@ -13,7 +13,6 @@ class SetEncoder(json.JSONEncoder):
         if isinstance(obj, set):
             return list(obj)
         return json.JSONEncoder.default(self, obj)
-
 
 class CHttpApi:
 
@@ -28,9 +27,11 @@ class CHttpApi:
 
     def __setUpRouting(self):
         self.server.get("/", callback=self.__index)
-        self.server.get("/results/<name>", callback=self.__results)
         self.server.get("/s/<static:path>", callback=self.__static)
         self.server.get("/websocket", callback=self.__websocket, apply=[websocket])
+
+        self.server.post("/results/<name>", callback=self.__results)
+        self.server.post("/statistics", callback=self.__statistics)
 
     def __thread(self):
         self.server.run(
@@ -51,7 +52,9 @@ class CHttpApi:
     def __index(self):
         return template('www/templates/index.html', results=self.mCore.mResults)
 
-    # def __statistics (только подсчеты определенных устройств и сервисов)
+    def __statistics(self):
+        response.set_header("Content-Type", "application/json")
+        return json.dumps(self.mCore.mStatistics)
 
     def __results(self, name):
         response.set_header("Content-Type", "application/json")

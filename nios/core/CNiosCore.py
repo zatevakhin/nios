@@ -15,8 +15,7 @@ from nios.core.CDataManager import CDataManager
 from nios.core.CHttpApi import CHttpApi
 from nios.core.CJsonObjectManager import CJsonObjectManager
 from nios.core.CScheduler import CScheduler
-from nios.core.data import CTask, ETaskPriority
-from nios.core.data.ETaskType import ETaskType
+from nios.core.data import CTask, ETaskPriority, ETaskType, EServiceType
 from nios.core.exploits.CExploitsManager import CExploitsManager
 from nios.core.modules.CModulesManager import CModulesManager
 from nios.core.plugins.CPluginsManager import CPluginsManager
@@ -53,6 +52,7 @@ class CNiosCore(object):
 
     def __init__(self, config: str):
         self.mResults: list = []
+        self.mStatistics: dict = {}
 
         self.mData = CDataManager()
         self.mConfig = CJsonObjectManager(config)
@@ -76,22 +76,22 @@ class CNiosCore(object):
         # ipRange = list(iptools.IpRange("176.8.0.0/16"))
 
         # KTM
-        # ipRange = list(iptools.IpRangeList(
-        #     "93.76.0.0/16",
-        #     "93.77.0.0/17",
-        #     "93.77.128.0/19",
-        #     "93.77.192.0/18",
-        #     "93.78.0.0/15",
-        #     "93.72.0.0/14"
-        # ))
-
         ipRange = list(iptools.IpRangeList(
-            "109.197.166.0/23",
-            "176.97.56.0/21",
-            "192.162.208.0/22"
+            "93.76.0.0/16",
+            "93.77.0.0/17",
+            "93.77.128.0/19",
+            "93.77.192.0/18",
+            "93.78.0.0/15",
+            "93.72.0.0/14"
         ))
 
-        ipRange = ["176.97.58.244"]
+        # ipRange = list(iptools.IpRangeList(
+        #     "109.197.166.0/23",
+        #     "176.97.56.0/21",
+        #     "192.162.208.0/22"
+        # ))
+
+        # ipRange = ["176.97.58.244"]
 
         # ipRange = list(iptools.IpRangeList(
         #     "37.229.0.0/16",
@@ -207,7 +207,32 @@ class CNiosCore(object):
     def saveResult(self, data: dict):
         print("*" * 80)
         print(data)
+        self.statisticsUpdate(data)
+        print("*" * 80)
+        print(self.mStatistics)
         self.mResults.append(data)
+
+    def statisticsUpdate(self, data):
+        collected = data.get("collected")
+        t = collected.get("type")
+
+        types = self.mStatistics.get("types", {})
+
+        types.update({int(t.value): (types.get(int(t.value), 0) + 1)})
+
+        self.mStatistics.update({"types": types})
+
+        if t == EServiceType.ROUTER:
+            routers = self.mStatistics.get(int(t.value), {})
+            vendor = collected.get("vendor", "UNKNOWN")
+            routers.update({vendor: (routers.get(vendor, 0) + 1)})
+            self.mStatistics.update({int(t.value): routers})
+
+        elif t == EServiceType.SERVER:
+            routers = self.mStatistics.get(int(t.value), {})
+            vendor = collected.get("vendor", "UNKNOWN")
+            routers.update({vendor: (routers.get(vendor, 0) + 1)})
+            self.mStatistics.update({int(t.value): routers})
 
     def put(self, task: CTask):
         self.mScheduler.put(task)
